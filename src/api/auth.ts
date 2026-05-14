@@ -29,7 +29,7 @@ export const loginApi = (data: LoginParams): Promise<ApiResponse<LoginResponse>>
     url: '/auth/login',
     method: 'POST',
     data
-  })
+  }).then(res => res.data)
 }
 
 /**
@@ -39,7 +39,7 @@ export const getUserInfoApi = (): Promise<ApiResponse<UserInfoResponse>> => {
   return request({
     url: '/auth/userinfo',
     method: 'GET'
-  })
+  }).then(res => res.data)
 }
 
 /**
@@ -49,5 +49,5 @@ export const logoutApi = (): Promise<ApiResponse<null>> => {
   return request({
     url: '/auth/logout',
     method: 'POST'
-  })
+  }).then(res => res.data)
 }

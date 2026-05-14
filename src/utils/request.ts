@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import axios, { type AxiosInstance } from 'axios'
 import { ElMessage } from 'element-plus'
 import router from '../router'
 import type { ApiResponse } from '../types/api'
@@ -14,10 +14,10 @@ const request: AxiosInstance = axios.create({
 
 // 请求拦截器
 request.interceptors.request.use(
-  (config: any) => {
+  (config) => {
     // 从localStorage获取token
     const token = localStorage.getItem('token')
-    if (token) {
+    if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`
     }
     return config
@@ -30,8 +30,8 @@ request.interceptors.request.use(
 
 // 响应拦截器
 request.interceptors.response.use(
-  (response: AxiosResponse<ApiResponse>) => {
-    const res = response.data
+  (response) => {
+    const res = response.data as ApiResponse
 
     // 如果返回的状态码不是200，则认为是错误
     if (res.code !== 200) {
@@ -39,7 +39,7 @@ request.interceptors.response.use(
       return Promise.reject(new Error(res.message || '请求失败'))
     }
 
-    return res
+    return response
   },
   (error) => {
     console.error('响应错误:', error)

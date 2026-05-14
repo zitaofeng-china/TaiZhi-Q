@@ -1,7 +1,14 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+// App根组件
 </script>
 
 <template>
-  <HelloWorld />
+  <router-view />
 </template>
+
+<style>
+#app {
+  width: 100%;
+  height: 100%;
+}
+</style>

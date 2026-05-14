@@ -21,3 +21,4 @@ declare module '@/views/error/404.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
+
